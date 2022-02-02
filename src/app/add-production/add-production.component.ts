@@ -12,4 +12,8 @@ export class AddProductionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addProduction(value: any) {
+    console.log(value)
+  }
+
 }

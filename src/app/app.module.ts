@@ -15,7 +15,10 @@ import { HeaderAdminComponent } from './header-admin/header-admin.component';
 import { AddProductionComponent } from './add-production/add-production.component';
 import { QualityComponent } from './quality/quality.component';
 import { HistoryComponent } from './history/history.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +37,10 @@ import { HistoryComponent } from './history/history.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule ,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added     
   ],
   providers: [],
   bootstrap: [AppComponent]
