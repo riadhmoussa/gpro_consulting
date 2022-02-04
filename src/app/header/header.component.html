@@ -3,19 +3,19 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#">GPRO Consulting</a>
       </div>
-    
+
       <ul class="nav navbar-nav navbar-right">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
                 <form class="d-flex">
-                    <button class="btn btn-outline-primary" type="submit">SignIn</button>
-                    <button class="btn btn-outline-primary" type="submit">SignUp</button>
+                    <button (click)="goToSignIn()" class="btn btn-outline-primary" type="submit">SignIn</button>
+                    <button (click)="goToSignUp()" class="btn btn-outline-primary" type="submit">SignUp</button>
                   </form>
             </li>
-           
+
           </ul>
-          
+
       </ul>
-      
+
     </div>
   </nav>

@@ -9,57 +9,34 @@
                     <form (ngSubmit)="addProduction(signup.value)" #signup="ngForm">
                       <div class="form-group">
                         <label for="sel1">Chaines</label>
-                        <select ngModel class="form-control" id="sel1">
-                          <option>Chaine 1</option>
-                          <option>Chaine 2</option>
-                          <option>Chaine 3</option>
-                          <option>Chaine 4</option>
+                        <select  ngModel   name="id_chaine" required  class="form-control" id="selectedChaine">
+                          <option value="" disabled>Choose a state</option>
+                          <option *ngFor="let opt of chaines" [value]="opt.id" >{{opt.nom}}</option>
+
                         </select>
                       </div>
 
                         <div class="form-group">
                           <label for="sel1">Sections</label>
-                          <select ngModel class="form-control" id="sel1">
-                            <option>Section 1</option>
-                            <option>Section 2</option>
-                            <option>Section 3</option>
-                            <option>Section 4</option>
+                          <select  ngModel name="id_section" required  class="form-control" id="sel1">
+                            <option value="" disabled>Choose a state</option>
+                            <option *ngFor="let opt of sections" [value]="opt.id" >{{opt.nom}}</option>
+
                           </select>
+
                         </div>
                         <div class="form-group">
-                          <input ngModel type="date" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                          <label for="sel1">Date</label>
+                          <input required ngModel type="date" name="dateProduction" id="dateProduction" class="form-control input-sm" placeholder="Email Address">
                       </div>
-                        
+
                         <input type="submit" value="Ajouter" class="btn btn-info btn-block">
-                    
+
                     </form>
                 </div>
             </div>
         </div>
     <h2></h2>
-    <p></p>            
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Chaine</th>
-         
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Doe</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Moe</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Dooley</td>
-        
-        </tr>
-      </tbody>
-    </table>
+    <p></p>
+
   </div>

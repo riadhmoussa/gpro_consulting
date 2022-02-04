@@ -8,38 +8,30 @@
                      <div class="panel-body">
                     <form (ngSubmit)="addChaine(signup.value)" #signup="ngForm">
                         <div class="form-group">
-                            <input ngModel type="email" name="email" id="email" class="form-control input-sm" placeholder="Nom de nouvelle chaine">
+                            <input ngModel type="text" name="nom" id="nom" class="form-control input-sm" placeholder="Nom de nouvelle chaine">
                         </div>
                         <input type="submit" value="Ajouter" class="btn btn-info btn-block">
-                    
+
                     </form>
                 </div>
             </div>
         </div>
     <h2></h2>
-    <p></p>            
+    <p></p>
     <table class="table">
       <thead>
         <tr>
           <th>#</th>
           <th>Chaine</th>
-         
+
         </tr>
       </thead>
-      <tbody>
+      <tbody  *ngFor="let chaine of chaines" >
         <tr>
-          <td>1</td>
-          <td>Doe</td>
+          <td>{{chaine.id}}</td>
+          <td>{{chaine.nom}}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Moe</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Dooley</td>
-        
-        </tr>
+
       </tbody>
     </table>
   </div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../model/User';
+import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
+import {ResponseRequest} from "../model/ResponseRequest";
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +12,7 @@ import { User } from '../model/User';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private userService: UserService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -20,31 +23,23 @@ export class SignUpComponent implements OnInit {
       this.toastr.error('Fill out your form');
 
     }else if(value.password===value.password_confirmation){
+      // @ts-ignore
+      this.userService.Register(value).subscribe((response: ResponseRequest) => {
+        if (response.message != 'success'){
+          this.toastr.error('SVP Réssayer');
 
+        }else{
+          localStorage.setItem('idUser', String((response.data as User).id));
+          this.toastr.success('Connectez-vous avec succès');
+
+          this.router.navigateByUrl('/dashboard');
+
+        }
+        console.log(response.message);
+      });
     }else{
       this.toastr.error('wrong match in  your password');
     }
 
-    /* this.userService.LoginIn(value).subscribe((response: Response) => {
-      if (response.message === 'false'){
-        this.toastr.error('E-mail ou mot de passe incorrect');
-
-      }else{
-        localStorage.setItem('idUser', String((response.data.user as User).id));
-        this.toastr.success('Connectez-vous avec succès');
-        console.log(value.email);
-        if (value.email === 'admin@admin.com'){
-          this.router.navigateByUrl('/admin');
-
-
-        }else{
-          this.router.navigateByUrl('/home');
-
-        }
-
-      }
-      console.log(response.message);
-    });
-    console.log(value); */
   }
 }

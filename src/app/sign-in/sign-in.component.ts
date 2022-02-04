@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/User';
+import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {ResponseRequest} from "../model/ResponseRequest";
 
 @Component({
   selector: 'app-sign-in',
@@ -8,34 +12,27 @@ import { User } from '../model/User';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   login(value: User) {
-    console.log(value)
-    /* this.userService.LoginIn(value).subscribe((response: Response) => {
-      if (response.message === 'false'){
+    // @ts-ignore
+    this.userService.LoginIn(value).subscribe((response: ResponseRequest) => {
+      if (response.message != 'success'){
         this.toastr.error('E-mail ou mot de passe incorrect');
 
       }else{
         localStorage.setItem('idUser', String((response.data.user as User).id));
         this.toastr.success('Connectez-vous avec succès');
         console.log(value.email);
-        if (value.email === 'admin@admin.com'){
-          this.router.navigateByUrl('/admin');
-
-
-        }else{
-          this.router.navigateByUrl('/home');
-
-        }
+        this.router.navigateByUrl('/dashboard');
 
       }
       console.log(response.message);
     });
-    console.log(value); */
+    console.log(value);
   }
 
 }

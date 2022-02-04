@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Chaine } from '../model/Chaine';
+import {UserService} from "../services/user.service";
+import {ChaineService} from "../services/chaine.service";
+import {ResponseRequest} from "../model/ResponseRequest";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-add-chaine',
@@ -8,41 +12,43 @@ import { Chaine } from '../model/Chaine';
   styleUrls: ['./add-chaine.component.css']
 })
 export class AddChaineComponent implements OnInit {
+  public chaines: Chaine[]= [];
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private chaineService: ChaineService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.getChaines();
   }
 
   addChaine(value: Chaine) {
-    console.log(value)
     if(value.nom.length==0){
       this.toastr.error('Fill out your form');
-
     }else {
-
-    }
-
-    /* this.userService.LoginIn(value).subscribe((response: Response) => {
-      if (response.message === 'false'){
-        this.toastr.error('E-mail ou mot de passe incorrect');
-
-      }else{
-        localStorage.setItem('idUser', String((response.data.user as User).id));
-        this.toastr.success('Connectez-vous avec succès');
-        console.log(value.email);
-        if (value.email === 'admin@admin.com'){
-          this.router.navigateByUrl('/admin');
-
+      // @ts-ignore
+      this.chaineService.addChaine(value).subscribe((response: ResponseRequest) => {
+        if (response.message != 'success'){
+          this.toastr.error('SVP Réssayer');
 
         }else{
-          this.router.navigateByUrl('/home');
+          this.toastr.success('Ajouter avec succès');
+          this.getChaines();
 
         }
 
+      });
+    }
+
+  }
+
+
+  public getChaines(): void {
+    this.chaineService.getChaines().subscribe(
+      (response: ResponseRequest) => {
+        this.chaines = response.data as Chaine[];
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
       }
-      console.log(response.message);
-    });
-    console.log(value); */
+    );
   }
 }
