@@ -12,14 +12,14 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody  *ngFor="let production of productions">
         <tr>
-          <td>chaine 1</td>
-          <td>coupage</td>
-          <td>01/29/2022</td>
+          <td>{{production.nameChaine}}</td>
+          <td>{{production.nameSection}}</td>
+          <td>{{production.dateProduction}}</td>
           <td>
-            <button type="button" class="btn btn-danger">Qualite</button>
-            <button type="button" class="btn btn-warning">Rendement</button>
+            <button (click)="goToQuality(production.id)" type="button" class="btn btn-danger">Qualite</button>
+            <button (click)="goToHistory(production.id)"  type="button" class="btn btn-warning">Rendement</button>
 
           </td>
         </tr>

@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {Section} from "../model/Section";
 import {ProductionService} from "../services/production.service";
 import {Production} from "../model/Production";
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-add-production',
@@ -19,7 +20,7 @@ export class AddProductionComponent implements OnInit {
   public chaines: Chaine[]= [];
   public productions: Production[]= [];
 
-  constructor(private productionService: ProductionService,private sectionService: SectionService,private chaineService: ChaineService,private toastr: ToastrService) { }
+  constructor(private location: Location,private productionService: ProductionService,private sectionService: SectionService,private chaineService: ChaineService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getChaines()
@@ -32,6 +33,15 @@ export class AddProductionComponent implements OnInit {
     if(value.id_chaine.length==0||value.id_section.length==0||value.dateProduction.length==0){
       this.toastr.error('Fill out your form');
     }else {
+
+      var chaine =  this.chaines.find(x => x.id.toString() == value.id_chaine);
+      var section =  this.sections.find(x => x.id.toString() == value.id_section);
+      value.nameChaine = (chaine as Chaine).nom
+      value.nameSection = (section as Section).nom
+      console.log("value")
+      console.log(chaine)
+      console.log(section)
+      console.log(value)
       // @ts-ignore
       this.productionService.addProduction(value).subscribe((response: ResponseRequest) => {
         if (response.message != 'success'){
@@ -39,14 +49,16 @@ export class AddProductionComponent implements OnInit {
 
         }else{
           this.toastr.success('Ajouter avec succès');
-
+          this.back()
 
         }
 
       });
     }
   }
-
+  back(): void {
+    this.location.back()
+  }
 
   public getChaines(): void {
     this.chaineService.getChaines().subscribe(
@@ -68,6 +80,8 @@ export class AddProductionComponent implements OnInit {
       }
     );
   }
+
+
 
   public getProductions(): void {
     this.productionService.getProductions().subscribe(

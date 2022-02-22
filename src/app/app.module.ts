@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import {HttpClientModule} from "@angular/common/http";
+import { PersonPipe } from './person.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import {HttpClientModule} from "@angular/common/http";
     HeaderAdminComponent,
     AddProductionComponent,
     QualityComponent,
-    HistoryComponent
+    HistoryComponent,
+    PersonPipe
   ],
   imports: [
     BrowserModule,

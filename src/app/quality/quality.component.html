@@ -6,16 +6,17 @@
 
       <tbody>
         <tr>
-          <td class="text-center">Chaine 1</td>
+          <td class="text-center">{{production.nameChaine}}</td>
         </tr>
         <tr>
-          <td class="text-center">Coupage</td>
+          <td class="text-center">{{production.nameSection}}</td>
         </tr>
         <tr>
-          <td class="text-center">31/12/9999</td>
+          <td class="text-center">{{production.dateProduction}}</td>
         </tr>
       </tbody>
     </table>
+  <form (ngSubmit)="addProduction(signup.value)" #signup="ngForm">
 
     <table class="table table-bordered">
         <thead>
@@ -24,18 +25,22 @@
               <th>Prenom</th>
               <th>Matricule</th>
               <th>Poste</th>
+              <th>Pourcentage</th>
 
             </tr>
           </thead>
         <tbody>
           <tr>
-            <td>  <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Nom"></td>
-            <td>  <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Prenom"></td>
-            <td>  <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Matricule"></td>
-            <td>  <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Poste"></td>
+            <td>  <input ngModel type="text" name="nom" id="nom" class="form-control input-sm" placeholder="Nom"></td>
+            <td>  <input ngModel type="text" name="prenom" id="prenom" class="form-control input-sm" placeholder="Prenom"></td>
+            <td>  <input ngModel type="text" name="matricule" id="matricule" class="form-control input-sm" placeholder="Matricule"></td>
+            <td>  <input ngModel type="text" name="poste" id="poste" class="form-control input-sm" placeholder="Poste"></td>
+            <td>  <input ngModel type="text" name="pourcentage" id="pourcentage" class="form-control input-sm" placeholder="Poste"></td>
+
           </tr>
 
         </tbody>
       </table>
       <input type="submit" value="Sauvegarder" class="btn btn-success">
+  </form>
   </div>
